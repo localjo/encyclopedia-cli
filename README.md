@@ -4,7 +4,7 @@
 
 ## Install
 
-Unzip or clone the repo, then, from the project's directory, run:
+Unzip or clone the repo, then, from the project's root directory, run:
 
 ```
 npm install
