@@ -4,9 +4,9 @@
 
 ## Install
 
+Unzip or clone the repo, then, from the project's directory, run:
+
 ```
-git clone https://github.com/localjo/wikipedia-cli.git
-cd wikipedia-cli
 npm install
 ```
 
