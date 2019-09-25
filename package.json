@@ -1,0 +1,36 @@
+{
+  "name": "wikipedia-cli",
+  "version": "1.0.0",
+  "description": "An application that allows reading Wikipedia from the command line",
+  "main": "index.js",
+  "bin": {
+    "wikipedia-cli": "./index.js"
+  },
+  "scripts": {
+    "test": "standard && jest",
+    "start": "node index.js"
+  },
+  "author": "Jo Sprague",
+  "license": "MIT",
+  "devDependencies": {
+    "axios-mock-adapter": "^1.17.0",
+    "jest": "^24.9.0",
+    "standard": "^14.3.1"
+  },
+  "dependencies": {
+    "axios": "^0.19.0",
+    "cliffyjo": "^2.1.0",
+    "lodash": "^4.17.15",
+    "yargs": "^14.0.0"
+  },
+  "standard": {
+    "globals": [
+      "test",
+      "describe",
+      "expect",
+      "it",
+      "beforeEach",
+      "afterEach"
+    ]
+  }
+}
