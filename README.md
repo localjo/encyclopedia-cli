@@ -12,7 +12,7 @@ npm install
 
 ## Usage
 
-Start the interactive CLI with 
+Start the interactive CLI with:
 
 ```
 node index.js --language en
@@ -23,7 +23,7 @@ You can replace `en` with the language code for any existing Wikipedia language
 
 ## Commands
 
-Once you've started the app, you can use the following commands:
+Once you've started the app, you can type the following commands:
 
 ### `READ <article>`
 
@@ -38,3 +38,7 @@ Exit the application.
 ### `HELP`
 
 Print the available commands with a short description.
+
+## Tests
+
+This app includes unit tests that can be run with `npm test`.
