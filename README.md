@@ -5,7 +5,9 @@
 ## Install
 
 ```
-npm install -g git+ssh://git@github.com/localjo/wikipedia-cli.git
+git clone https://github.com/localjo/wikipedia-cli.git
+cd wikipedia-cli
+npm install
 ```
 
 ## Usage
@@ -13,7 +15,7 @@ npm install -g git+ssh://git@github.com/localjo/wikipedia-cli.git
 Start the interactive CLI with 
 
 ```
-wikipedia-cli --language en
+node index.js --language en
 ```
 
 You can replace `en` with the language code for any existing Wikipedia language
