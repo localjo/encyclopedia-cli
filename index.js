@@ -1,13 +1,13 @@
 const cliffy = require('cliffyjo')
 const getArticleText = require('./api').getArticleText
-const verifyWikiLanguage = require('./api').verifyWikiLanguage
+const verifyEncyclopedia = require('./api').verifyEncyclopedia
 const viewText = require('./viewer').viewText
 const argv = require('yargs').alias('l', 'language').argv
 
 const { CLI } = cliffy
-verifyWikiLanguage(argv.language).then(lang => {
+verifyEncyclopedia(argv.language).then(lang => {
   const cli = new CLI()
-    .setDelimiter(`Wikipedia (${lang}) > `)
+    .setDelimiter(`Encyclopedia (${lang}) > `)
     .addCommand('READ', {
       description: 'Show article text. Press "q" to stop reading an article.',
       parameters: ['article'],

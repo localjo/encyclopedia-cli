@@ -1,6 +1,6 @@
-# wikipedia-cli
+# encyclopedia-cli
 
-> An application that allows reading Wikipedia from the command line
+> A demo application that allows reading a MediaWiki encyclopedia from the command line
 
 ## Install
 
@@ -8,6 +8,12 @@ Unzip or clone the repo, then, from the project's root directory, run:
 
 ```
 npm install
+```
+
+Before running the app, you must set which MediaWiki domain to use as your encyclopedia source. For example;
+
+```bash
+export ENCYCLOPEDIA_DOMAIN=wikipedia.org
 ```
 
 ## Usage
@@ -18,7 +24,7 @@ Start the interactive CLI with:
 node index.js --language en
 ```
 
-You can replace `en` with the language code for any existing Wikipedia language
+The language parameter is optional. You can replace `en` with the language code for any existing encyclopedia language
 (e.g. `fr`, `es`, `de`, etc).
 
 ## Commands

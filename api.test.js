@@ -2,29 +2,31 @@ const axios = require('axios')
 const MockAdapter = require('axios-mock-adapter')
 const api = require('./api')
 
+const domain = process.env.ENCYCLOPEDIA_DOMAIN
+
 const mock = new MockAdapter(axios)
 
 beforeEach(() => {
   mock.reset()
 })
 
-describe('verifyWikiLanguage', () => {
+describe('verifyEncyclopedia', () => {
   it('Uses English if no language supplied', () => {
     expect.assertions(1)
-    return api.verifyWikiLanguage().then(l => {
+    return api.verifyEncyclopedia().then(l => {
       expect(l).toEqual('en')
     })
   })
 
   it('Uses English if non-alphanumeric language supplied', () => {
     expect.assertions(1)
-    return api.verifyWikiLanguage('invalid.language').then(l => {
+    return api.verifyEncyclopedia('invalid.language').then(l => {
       expect(l).toEqual('en')
     })
   })
 
-  it('Uses English if no wikipedia exisits in language ', () => {
-    mock.onGet('https://cnr.wikipedia.org/w/api.php', {
+  it('Uses English if no encyclopedia exisits in language ', () => {
+    mock.onGet(`https://cnr.${domain}/w/api.php`, {
       params: {
         action: 'query',
         meta: 'siteinfo',
@@ -33,14 +35,14 @@ describe('verifyWikiLanguage', () => {
       }
     }).reply(200, {})
     expect.assertions(1)
-    return api.verifyWikiLanguage('cnr').then(language => {
-    // Montenegran, 'cnr', is a valid language code with no wikipedia
+    return api.verifyEncyclopedia('cnr').then(language => {
+    // Montenegran, 'cnr', is a valid language code with no encyclopedia
       expect(language).toEqual('en')
     })
   })
 
   it('Correctly verifies language codes', () => {
-    mock.onGet('https://es.wikipedia.org/w/api.php', {
+    mock.onGet(`https://es.${domain}/w/api.php`, {
       params: {
         action: 'query',
         meta: 'siteinfo',
@@ -49,7 +51,7 @@ describe('verifyWikiLanguage', () => {
       }
     }).reply(200, { query: { general: { generator: 'MediaWiki' } } })
     expect.assertions(1)
-    return api.verifyWikiLanguage('es').then(language => {
+    return api.verifyEncyclopedia('es').then(language => {
       expect(language).toEqual('es')
     })
   })
@@ -57,7 +59,7 @@ describe('verifyWikiLanguage', () => {
 
 describe('getArticleText', () => {
   it('Returns text from article', () => {
-    mock.onGet('https://en.wikipedia.org/w/api.php', {
+    mock.onGet(`https://en.${domain}/w/api.php`, {
       params: {
         action: 'query',
         format: 'json',
@@ -74,7 +76,7 @@ describe('getArticleText', () => {
   })
 
   it('Encodes spaces and special characters in article name', () => {
-    mock.onGet('https://en.wikipedia.org/w/api.php', {
+    mock.onGet(`https://en.${domain}/w/api.php`, {
       params: {
         action: 'query',
         format: 'json',

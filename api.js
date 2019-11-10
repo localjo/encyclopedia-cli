@@ -2,8 +2,13 @@
 const axios = require('axios')
 const get = require('lodash/get')
 
-function verifyWikiLanguage (lang) {
+const domain = process.env.ENCYCLOPEDIA_DOMAIN
+
+function verifyEncyclopedia (lang) {
   return new Promise((resolve, reject) => {
+    if (!domain) {
+      reject(new Error('You must set ENCYCLOPEDIA_DOMAIN to a valid MediaWiki domain.'))
+    }
     if (!lang) {
       console.log('No language chosen. Defaulting to English.')
       resolve('en')
@@ -15,8 +20,8 @@ function verifyWikiLanguage (lang) {
       resolve('en')
       return
     }
-    console.log(`Verifying that ${lang} Wikipedia exists...`)
-    axios.get(`https://${lang}.wikipedia.org/w/api.php`, {
+    console.log(`Verifying that ${lang} encyclopedia exists...`)
+    axios.get(`https://${lang}.${domain}/w/api.php`, {
       params: {
         action: 'query',
         meta: 'siteinfo',
@@ -24,12 +29,12 @@ function verifyWikiLanguage (lang) {
         format: 'json'
       }
     }).then(res => {
-      const isWikipedia = get(res, 'data.query.general.generator', '').includes('MediaWiki')
-      if (isWikipedia) {
-        console.log(`Using Wikipedia in ${lang}`)
+      const isMediaWiki = get(res, 'data.query.general.generator', '').includes('MediaWiki')
+      if (isMediaWiki) {
+        console.log(`Using encyclopedia in ${lang}`)
         resolve(lang)
       } else {
-        console.log(`No ${lang} Wikipedia found. Defaulting to English.`)
+        console.log(`No ${lang} encyclopedia found. Defaulting to English.`)
         resolve('en')
       }
     }).catch(err => {
@@ -43,7 +48,7 @@ function getArticleText (title, lang) {
   return new Promise((resolve, reject) => {
     const encodedTitle = encodeURIComponent(title.replace(/\s/g, '_')).replace(/'/g, '%27')
     console.log(`Searching for "${encodedTitle}"`)
-    axios.get(`https://${lang}.wikipedia.org/w/api.php`, {
+    axios.get(`https://${lang}.${domain}/w/api.php`, {
       params: {
         action: 'query',
         format: 'json',
@@ -60,4 +65,4 @@ function getArticleText (title, lang) {
   })
 }
 
-module.exports = { getArticleText, verifyWikiLanguage }
+module.exports = { getArticleText, verifyEncyclopedia }

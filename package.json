@@ -1,10 +1,10 @@
 {
-  "name": "wikipedia-cli",
+  "name": "encyclopedia-cli",
   "version": "1.0.0",
-  "description": "An application that allows reading Wikipedia from the command line",
+  "description": "An application that allows reading a MediaWiki encyclopedia from the command line",
   "main": "index.js",
   "bin": {
-    "wikipedia-cli": "./index.js"
+    "encyclopedia-cli": "./index.js"
   },
   "scripts": {
     "test": "standard && jest",
