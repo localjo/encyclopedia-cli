@@ -8,4 +8,6 @@ function viewText (text) {
   })
 }
 
-module.exports = { viewText }
+module.exports = {
+  viewText
+}
